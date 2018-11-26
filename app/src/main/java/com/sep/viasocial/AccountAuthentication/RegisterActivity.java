@@ -20,6 +20,7 @@ import com.sep.viasocial.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    //this is from branch Zahari
     private FirebaseAuth mAuth;
     private EditText emailText;
     private EditText passwordText;
