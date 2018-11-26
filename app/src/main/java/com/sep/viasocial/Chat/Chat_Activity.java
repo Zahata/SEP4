@@ -22,6 +22,7 @@ import java.util.List;
 
 public class Chat_Activity extends AppCompatActivity {
 
+    //branch zahari
     private static final String TAG = "MainActivity";
 
     public static final String ANONYMOUS = "anonymous";
