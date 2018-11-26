@@ -15,12 +15,14 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sep.viasocial.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chat_Activity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
     //branch zahari
     private static final String TAG = "MainActivity";
@@ -35,12 +37,18 @@ public class Chat_Activity extends AppCompatActivity {
     private Button mSendButton;
     private String mUsername;
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mUsername = ANONYMOUS;
+
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDatabase.getReference().child("messages");
 
         // Initialize references to views
         mMessageListView =  findViewById(R.id.messageListView);
@@ -49,8 +57,8 @@ public class Chat_Activity extends AppCompatActivity {
         mSendButton =  findViewById(R.id.sendButton);
 
         // Initialize message ListView and its adapter
-        List<ChatMessage> friendlyMessages = new ArrayList<>();
-        mChatAdapter = new ChatAdapter(this, R.layout.activity_chat, friendlyMessages);
+        List<ChatMessage> message = new ArrayList<>();
+        mChatAdapter = new ChatAdapter(this, R.layout.chat_message, message);
         mMessageListView.setAdapter(mChatAdapter);
 
         // ImagePickerButton shows an image picker to upload a image for a message
@@ -86,8 +94,8 @@ public class Chat_Activity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Send messages on click
-
+                ChatMessage message = new ChatMessage(mMessageEditText.getText().toString(),mUsername,null);
+                mDatabaseReference.push().setValue(message);
                 // Clear input box
                 mMessageEditText.setText("");
             }

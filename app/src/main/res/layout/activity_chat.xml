@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Chat.Chat_Activity">
+    tools:context=".Chat.ChatActivity">
 
     <ListView
         android:id="@+id/messageListView"
@@ -28,14 +28,17 @@
             android:id="@+id/photoPickerButton"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@android:drawable/ic_menu_gallery" />
+            android:background="@android:drawable/ic_menu_gallery"
+            android:contentDescription="Image"/>
 
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="text"
+            android:autofillHints="Aa"/>
 
         <Button
             android:id="@+id/sendButton"

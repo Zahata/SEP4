@@ -12,13 +12,13 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".AccountAuthentication.LoginActivity" />
         <activity android:name=".AccountAuthentication.RegisterActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".Chat.Chat_Activity"></activity>
+        <activity android:name=".Chat.ChatActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
     </application>
 
 </manifest>
