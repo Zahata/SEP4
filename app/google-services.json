@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "247045939418",
+    "firebase_url": "https://sep4viasocial.firebaseio.com",
+    "project_id": "sep4viasocial",
+    "storage_bucket": "sep4viasocial.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247045939418:android:f75682802ae996df",
+        "android_client_info": {
+          "package_name": "com.sep.viasocial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247045939418-d16mi04cfr14eouf13d2mv29clr2i3tq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sep.viasocial",
+            "certificate_hash": "5c1ad2cedb80cabf67b64fa0454f306340fa0761"
+          }
+        },
+        {
+          "client_id": "247045939418-n3kbuq4ipqr372qr33hptf2nkri6rqlq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaSzohTPAhQP2PprC1_BHjtFmwLgMIhIg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247045939418-n3kbuq4ipqr372qr33hptf2nkri6rqlq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
