@@ -48,13 +48,6 @@
             android:layout_gravity="center"
             android:layout_margin="15dp"/>
 
-        <TextView
-            android:id="@+id/alreadyRegistered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Already Registered? Press here to sign in."
-            android:onClick="alreadyRegistered"
-            android:textAlignment="center"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">VIA Social</string>
     <string name="send_button_label">Send</string>
+    <string name="welcome_string">Welcome to VIA Social</string>
+    <string name="notRegistered">Not registered? Click here to register</string>
+    <string name="alreadyRegistered">Already registered? Click here to login</string>
+    <string name="enterEmail">Enter your email</string>
+    <string name="loginText">Login</string>
+    <string name="passwordText">Enter your password</string>
+    <string name="loginButton">Login</string>
 </resources>

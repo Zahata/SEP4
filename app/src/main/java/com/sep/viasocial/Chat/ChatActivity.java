@@ -44,13 +44,10 @@ public class ChatActivity extends AppCompatActivity {
     private Button mSendButton;
 
     private String mUsername;
-    private Intent loginIntent;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +55,19 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         mUsername = ANONYMOUS;
-        loginIntent = new Intent(ChatActivity.this,LoginActivity.class);
 
         mDatabase = FirebaseDatabase.getInstance();
-        mFirebaseAuth = FirebaseAuth.getInstance();
-
         mDatabaseReference = mDatabase.getReference().child("messages");
 
         // Initialize references to views
-        mMessageListView =  findViewById(R.id.messageListView);
-        mPhotoPickerButton =  findViewById(R.id.photoPickerButton);
+        mMessageListView = findViewById(R.id.messageListView);
+        mPhotoPickerButton = findViewById(R.id.photoPickerButton);
         mMessageEditText = findViewById(R.id.messageEditText);
-        mSendButton =  findViewById(R.id.sendButton);
+        mSendButton = findViewById(R.id.sendButton);
 
         // Initialize message ListView and its adapter
         List<ChatMessage> messages = new ArrayList<>();
-        mChatAdapter = new ChatAdapter(this,R.layout.chat_message,messages);
+        mChatAdapter = new ChatAdapter(this, R.layout.chat_message, messages);
         mMessageListView.setAdapter(mChatAdapter);
 
         // ImagePickerButton shows an image picker to upload a image for a message
@@ -109,83 +103,31 @@ public class ChatActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChatMessage message = new ChatMessage(mMessageEditText.getText().toString(), mUsername, null);
-                mDatabaseReference.push().setValue(message);
-                // Clear input box
-                mMessageEditText.setText("");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    mUsername = user.getEmail();
+                    ChatMessage message = new ChatMessage(mMessageEditText.getText().toString(), mUsername, null);
+                    mDatabaseReference.push().setValue(message);
+                    // Clear input box
+                    mMessageEditText.setText("");
+                }
             }
         });
-
-        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+        mChildEventListener = new ChildEventListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    onSignedInInitialize(user.getDisplayName());
-                    Toast.makeText(ChatActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    finish();
-                    startActivity(loginIntent);
-                    onSignedOutClear();
-                }
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+               ChatMessage message = dataSnapshot.getValue(ChatMessage.class);
+                mChatAdapter.add(message);
             }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
-        detachDatabaseReadListener();
-        mChatAdapter.clear();
-    }
-    private void attachDatabaseReadListener(){
-        if(mChildEventListener == null) {
-            mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    ChatMessage message = dataSnapshot.getValue(ChatMessage.class);
-                    mChatAdapter.add(message);
-                }
-
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            };
-            mDatabaseReference.addChildEventListener(mChildEventListener);
-        }
-    }
-    private void detachDatabaseReadListener(){
-        if(mChildEventListener != null) {
-            mDatabaseReference.removeEventListener(mChildEventListener);
-            mChildEventListener = null;
-        }
-    }
-    public void onSignedInInitialize(String username){
-        mUsername = username;
-        attachDatabaseReadListener();
-    }
-    public void onSignedOutClear(){
-        mUsername = ANONYMOUS;
-        mChatAdapter.clear();
+        mDatabaseReference.addChildEventListener(mChildEventListener);
     }
 }

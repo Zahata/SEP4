@@ -21,12 +21,10 @@ import com.sep.viasocial.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    //this is from branch Zahari
     private FirebaseAuth mAuth;
     private EditText emailText;
     private EditText passwordText;
     private Intent chatIntent;
-    private Intent alreadyRegisteredIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,6 @@ public class RegisterActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.passwordText);
 
         chatIntent = new Intent(this, ChatActivity.class);
-        alreadyRegisteredIntent = new Intent(this, LoginActivity.class);
     }
     public void createUserWithEmailAndPassword(){
         String email = emailText.getText().toString().trim();
@@ -62,8 +59,5 @@ public class RegisterActivity extends AppCompatActivity {
     public void register(View v){
             createUserWithEmailAndPassword();
         }
-    public void alreadyRegistered(View v){
-        finish();
-        startActivity(alreadyRegisteredIntent);
-    }
+
 }

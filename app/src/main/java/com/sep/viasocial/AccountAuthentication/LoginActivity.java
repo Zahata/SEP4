@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailLoginText;
     private EditText passwordLoginText;
     private Intent chatIntent;
-    private Intent notRegisteredIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         passwordLoginText = findViewById(R.id.passwordLoginText);
 
         chatIntent = new Intent(this,ChatActivity.class);
-        notRegisteredIntent = new Intent(this,RegisterActivity.class);
     }
     public void signInWithEmailAndPassword(){
         String email = emailLoginText.getText().toString().trim();
@@ -58,10 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View v){
         signInWithEmailAndPassword();
-    }
-    public void notRegistered(View v){
-        finish();
-        startActivity(notRegisteredIntent);
     }
 
 }

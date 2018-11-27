@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Login"
+            android:text="@string/loginText"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:hint="Enter your email"
+            android:hint="@string/enterEmail"
             android:layout_gravity="center"
             android:layout_margin="15dp"/>
 
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Enter your password"
+            android:hint="@string/passwordText"
             android:layout_gravity="center"
             android:layout_margin="15dp"/>
 
@@ -43,18 +43,11 @@
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/loginButton"
             android:onClick="login"
             android:layout_gravity="center"
             android:layout_margin="15dp"/>
 
-        <TextView
-            android:id="@+id/notRegistered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Not registered yet? Press here to register."
-            android:onClick="notRegistered"
-            android:textAlignment="center"/>
     </LinearLayout>
 
 </RelativeLayout>
