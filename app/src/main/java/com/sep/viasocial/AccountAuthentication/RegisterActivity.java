@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.sep.viasocial.Chat.ChatActivity;
 import com.sep.viasocial.MainActivity;
 import com.sep.viasocial.R;
 
@@ -24,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailText;
     private EditText passwordText;
-    private Intent newUserIntent;
+    private Intent chatIntent;
     private Intent alreadyRegisteredIntent;
 
     @Override
@@ -37,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         emailText = findViewById(R.id.emailText);
         passwordText = findViewById(R.id.passwordText);
 
-        newUserIntent = new Intent(this, MainActivity.class);
+        chatIntent = new Intent(this, ChatActivity.class);
         alreadyRegisteredIntent = new Intent(this, LoginActivity.class);
     }
     public void createUserWithEmailAndPassword(){
@@ -50,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(RegisterActivity.this,"You have registered successfully",Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(newUserIntent);
+                            startActivity(chatIntent);
                         }
                         else{
                             Toast.makeText(RegisterActivity.this,"Registration unsuccessful, please try again!",Toast.LENGTH_SHORT).show();

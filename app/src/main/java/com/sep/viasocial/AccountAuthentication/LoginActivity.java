@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.sep.viasocial.Chat.ChatActivity;
 import com.sep.viasocial.MainActivity;
 import com.sep.viasocial.R;
 
@@ -25,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailLoginText;
     private EditText passwordLoginText;
-    private Intent profileIntent;
+    private Intent chatIntent;
     private Intent notRegisteredIntent;
 
     @Override
@@ -38,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         emailLoginText = findViewById(R.id.emailLoginText);
         passwordLoginText = findViewById(R.id.passwordLoginText);
 
-        profileIntent = new Intent(this,MainActivity.class);
+        chatIntent = new Intent(this,ChatActivity.class);
         notRegisteredIntent = new Intent(this,RegisterActivity.class);
     }
     public void signInWithEmailAndPassword(){
@@ -49,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     finish();
-                    startActivity(profileIntent);
+                    startActivity(chatIntent);
                 }
             }
         });

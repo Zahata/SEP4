@@ -1,17 +1,17 @@
 package com.sep.viasocial.Chat;
 
-import android.content.Context;
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.sep.viasocial.R;
 
 import java.util.List;
-
 
 public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     public ChatAdapter(Context context, int resource, List<ChatMessage> objects) {
@@ -21,11 +21,11 @@ public class ChatAdapter extends ArrayAdapter<ChatMessage> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.activity_chat, parent, false);
+            convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.chat_message, parent, false);
         }
 
-        ImageView photoImageView = convertView.findViewById(R.id.photoImageView);
-        TextView messageTextView = convertView.findViewById(R.id.messageTextView);
+        ImageView photoImageView =  convertView.findViewById(R.id.photoImageView);
+        TextView messageTextView =  convertView.findViewById(R.id.messageTextView);
         TextView authorTextView =  convertView.findViewById(R.id.nameTextView);
 
         ChatMessage message = getItem(position);

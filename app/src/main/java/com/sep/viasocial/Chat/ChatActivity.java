@@ -1,7 +1,10 @@
 package com.sep.viasocial.Chat;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -14,18 +17,22 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sep.viasocial.AccountAuthentication.LoginActivity;
 import com.sep.viasocial.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
-
-    //branch zahari
-    private static final String TAG = "MainActivity";
 
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
@@ -35,30 +42,38 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
     private Button mSendButton;
+
     private String mUsername;
+    private Intent loginIntent;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
+    private ChildEventListener mChildEventListener;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat);
 
         mUsername = ANONYMOUS;
+        loginIntent = new Intent(ChatActivity.this,LoginActivity.class);
 
         mDatabase = FirebaseDatabase.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         mDatabaseReference = mDatabase.getReference().child("messages");
 
         // Initialize references to views
         mMessageListView =  findViewById(R.id.messageListView);
         mPhotoPickerButton =  findViewById(R.id.photoPickerButton);
-        mMessageEditText =  findViewById(R.id.messageEditText);
+        mMessageEditText = findViewById(R.id.messageEditText);
         mSendButton =  findViewById(R.id.sendButton);
 
         // Initialize message ListView and its adapter
-        List<ChatMessage> message = new ArrayList<>();
-        mChatAdapter = new ChatAdapter(this, R.layout.chat_message, message);
+        List<ChatMessage> messages = new ArrayList<>();
+        mChatAdapter = new ChatAdapter(this,R.layout.chat_message,messages);
         mMessageListView.setAdapter(mChatAdapter);
 
         // ImagePickerButton shows an image picker to upload a image for a message
@@ -94,16 +109,83 @@ public class ChatActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ChatMessage message = new ChatMessage(mMessageEditText.getText().toString(),mUsername,null);
+                ChatMessage message = new ChatMessage(mMessageEditText.getText().toString(), mUsername, null);
                 mDatabaseReference.push().setValue(message);
                 // Clear input box
                 mMessageEditText.setText("");
             }
         });
+
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    onSignedInInitialize(user.getDisplayName());
+                    Toast.makeText(ChatActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    finish();
+                    startActivity(loginIntent);
+                    onSignedOutClear();
+                }
+            }
+        };
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+    protected void onResume() {
+        super.onResume();
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        detachDatabaseReadListener();
+        mChatAdapter.clear();
+    }
+    private void attachDatabaseReadListener(){
+        if(mChildEventListener == null) {
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    ChatMessage message = dataSnapshot.getValue(ChatMessage.class);
+                    mChatAdapter.add(message);
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            };
+            mDatabaseReference.addChildEventListener(mChildEventListener);
+        }
+    }
+    private void detachDatabaseReadListener(){
+        if(mChildEventListener != null) {
+            mDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener = null;
+        }
+    }
+    public void onSignedInInitialize(String username){
+        mUsername = username;
+        attachDatabaseReadListener();
+    }
+    public void onSignedOutClear(){
+        mUsername = ANONYMOUS;
+        mChatAdapter.clear();
     }
 }

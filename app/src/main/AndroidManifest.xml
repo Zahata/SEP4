@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".AccountAuthentication.LoginActivity" />
+        <activity android:name=".AccountAuthentication.LoginActivity"></activity>
         <activity android:name=".AccountAuthentication.RegisterActivity">
 
         </activity>
