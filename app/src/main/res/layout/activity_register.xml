@@ -7,7 +7,7 @@
     tools:context=".AccountAuthentication.RegisterActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -15,18 +15,25 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Registration"
+            android:text="@string/registrationLabel"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
-
+        <!--<EditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/nameHint"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"/>-->
         <EditText
             android:id="@+id/emailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:hint="Enter your email"
+            android:hint="@string/emailHint"
             android:layout_gravity="center"
             android:layout_margin="15dp"/>
 
@@ -35,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Enter your password"
+            android:hint="@string/passwordHint"
             android:layout_gravity="center"
             android:layout_margin="15dp"/>
 
@@ -43,7 +50,7 @@
             android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="@string/registerButton"
             android:onClick="register"
             android:layout_gravity="center"
             android:layout_margin="15dp"/>

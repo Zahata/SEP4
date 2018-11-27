@@ -41,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         chatIntent = new Intent(this,ChatActivity.class);
     }
     public void signInWithEmailAndPassword(){
-        String email = emailLoginText.getText().toString().trim();
-        String password = passwordLoginText.getText().toString().trim();
+        String email = emailLoginText.getText().toString();
+        String password = passwordLoginText.getText().toString();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

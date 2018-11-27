@@ -24,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailText;
     private EditText passwordText;
+   // private EditText nameText;
     private Intent chatIntent;
 
     @Override
@@ -35,12 +36,13 @@ public class RegisterActivity extends AppCompatActivity {
 
         emailText = findViewById(R.id.emailText);
         passwordText = findViewById(R.id.passwordText);
+        //nameText = findViewById(R.id.nameText);
 
         chatIntent = new Intent(this, ChatActivity.class);
     }
     public void createUserWithEmailAndPassword(){
-        String email = emailText.getText().toString().trim();
-        String password = passwordText.getText().toString().trim();
+        String email = emailText.getText().toString();
+        String password = passwordText.getText().toString();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -57,7 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
     public void register(View v){
-            createUserWithEmailAndPassword();
+       /* String name = nameText.getText().toString();*/
+        createUserWithEmailAndPassword();
         }
 
 }

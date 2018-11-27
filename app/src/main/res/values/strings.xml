@@ -8,4 +8,9 @@
     <string name="loginText">Login</string>
     <string name="passwordText">Enter your password</string>
     <string name="loginButton">Login</string>
+    <string name="registerButton">Register</string>
+    <string name="passwordHint">Enter your password</string>
+    <string name="emailHint">Enter your email</string>
+    <string name="nameHint">Enter First and Last name</string>
+    <string name="registrationLabel">Registration</string>
 </resources>
