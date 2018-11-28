@@ -9,14 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".AccountAuthentication.LoginActivity"></activity>
-        <activity android:name=".AccountAuthentication.RegisterActivity"></activity>
-        <activity android:name=".Chat.ChatActivity"></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AccountAuthentication.LoginActivity" />
+        <activity android:name=".AccountAuthentication.RegisterActivity" />
+        <activity android:name=".Chat.ChatActivity" />
+        <activity
+            android:name=".MainMenu"
+            android:label="@string/title_activity_main_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
