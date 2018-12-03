@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.sep.viasocial.Chat.ChatActivity;
 import com.sep.viasocial.MainActivity;
 import com.sep.viasocial.R;
+import com.sep.viasocial.SetupProfile;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText passwordText;
    // private EditText nameText;
-    private Intent chatIntent;
+    private Intent setupProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordText = findViewById(R.id.passwordText);
         //nameText = findViewById(R.id.nameText);
 
-        chatIntent = new Intent(this, ChatActivity.class);
+        setupProfile = new Intent(this, SetupProfile.class);
     }
     public void createUserWithEmailAndPassword(){
         String email = emailText.getText().toString();
@@ -50,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(RegisterActivity.this,"You have registered successfully",Toast.LENGTH_SHORT).show();
                             finish();
-                            startActivity(chatIntent);
+                            startActivity(setupProfile);
                         }
                         else{
                             Toast.makeText(RegisterActivity.this,"Registration unsuccessful, please try again!",Toast.LENGTH_SHORT).show();

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,12 +31,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SetupProfile extends AppCompatActivity {
 
     private FirebaseUser user;
+    private String userID;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseStorage storage;
     private StorageReference storageReference;
-    private String userID;
 
     private CircleImageView profileImage;
     private EditText nameText;
@@ -44,18 +45,23 @@ public class SetupProfile extends AppCompatActivity {
     private EditText programmeText;
     private EditText interestsText;
     private Button saveButton;
+    private Intent mainMenu;
 
     private Intent pickImage;
     private static final int RC_PHOTO_PICKER = 2;
     private Uri selectedImageUri;
-    private Uri downloadUrl;
+    private  Uri downloadUrl;
 
+    public SetupProfile() {
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_profile);
+
+        mainMenu = new Intent(this,MainMenu.class);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
@@ -74,17 +80,6 @@ public class SetupProfile extends AppCompatActivity {
         interestsText = findViewById(R.id.interestsEdit);
         saveButton = findViewById(R.id.saveInfoButton);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user != null) {
-                    Profile profile = new Profile(downloadUrl, nameText.getText().toString(), addressText.getText().toString(),
-                            phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString());
-                    mDatabaseReference.push().setValue(profile);
-                }
-
-            }
-        });
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +90,19 @@ public class SetupProfile extends AppCompatActivity {
             }
         });
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (user != null) {
+                    Profile profile = new Profile(downloadUrl.toString(), nameText.getText().toString(), addressText.getText().toString(),
+                            phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString());
+                    mDatabaseReference.push().setValue(profile);
+                    Toast.makeText(SetupProfile.this,"Successful",Toast.LENGTH_SHORT).show();
+                    //startActivity(mainMenu);
+                }
+
+            }
+        });
 
     }
     @Override

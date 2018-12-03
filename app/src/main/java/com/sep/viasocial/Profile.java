@@ -6,7 +6,7 @@ import java.net.URI;
 
 public class Profile {
 
-    public Uri photoURL;
+    public String photoURL;
     public String fullName;
     public String address;
     public String phone;
@@ -16,7 +16,7 @@ public class Profile {
 
     public Profile(){}
 
-    public Profile(Uri photo, String name, String address,String phone, String programme, String interests){
+    public Profile(String photo, String name, String address,String phone, String programme, String interests){
         this.photoURL = photo;
         this.fullName = name;
         this.address = address;
@@ -25,11 +25,11 @@ public class Profile {
         this.interests = interests;
     }
 
-    public Uri getPhotoURL() {
+    public String getPhotoURL() {
         return photoURL;
     }
 
-    public void setPhotoURL(Uri photoURL) {
+    public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
 

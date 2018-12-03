@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         goToLogin = new Intent(MainActivity.this, LoginActivity.class);
 
     }
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             startActivity(sendToChat);
         }
-    }
+    }*/
     public void goToRegister(View v){
         finish();
         startActivity(goToRegister);
