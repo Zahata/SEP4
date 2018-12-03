@@ -19,5 +19,11 @@
     <string name="tab_text_3">My profile</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="full_name_textView">Please enter your full name</string>
+    <string name="addressLabel">Please enter your address</string>
+    <string name="studyProgramme">Please enter your study programme</string>
+    <string name="interests">Please share what are your interests</string>
+    <string name="phone">Please enter your phone number</string>
+    <string name="saveButton">Save</string>
 
 </resources>

@@ -1,27 +1,35 @@
+package com.sep.viasocial;
+
+import android.net.Uri;
+
+import java.net.URI;
+
 public class Profile {
 
-    public String photoURL;
+    public Uri photoURL;
     public String fullName;
     public String address;
+    public String phone;
     public String studyProgramme;
     public String interests;
 
 
     public Profile(){}
 
-    public Profile(String photo, String name, String address, String programme, String interests){
+    public Profile(Uri photo, String name, String address,String phone, String programme, String interests){
         this.photoURL = photo;
         this.fullName = name;
         this.address = address;
+        this.phone = phone;
         this.studyProgramme = programme;
         this.interests = interests;
     }
 
-    public String getPhotoURL() {
+    public Uri getPhotoURL() {
         return photoURL;
     }
 
-    public void setPhotoURL(String photoURL) {
+    public void setPhotoURL(Uri photoURL) {
         this.photoURL = photoURL;
     }
 
@@ -40,7 +48,12 @@ public class Profile {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
     public String getStudyProgramme() {
         return studyProgramme;
     }
