@@ -39,15 +39,11 @@ public class MyProfileFragment extends Fragment {
     private TextView interests;
     private Intent goBackToLogin;
 
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseUser user;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private DatabaseReference databaseReference;
     private String userID;
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mDatabaseReference;
-    private ChildEventListener childEventListener;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
 
     @Override
@@ -63,117 +59,55 @@ public class MyProfileFragment extends Fragment {
         interests = rootView.findViewById(R.id.interests);
         goBackToLogin = new Intent(MyProfileFragment.this.getActivity(),LoginActivity.class);
 
-        mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
         userID = user.getUid();
-       /* childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Profile profile = dataSnapshot.child("Users").child(userID).getValue(Profile.class);
-                String image = profile.getPhotoURL();
-                Picasso.get().load(image).into(profileImage);
 
-                String name = profile.getFullName();
-                fullname.setText(name);
-
-                String address = profile.getAddress();
-                fullname.setText(address);
-
-                String phone = profile.getPhone();
-                fullname.setText(phone);
-
-                String studyProgramme = profile.getStudyProgramme();
-                fullname.setText(studyProgramme);
-
-                String interests = profile.getInterests();
-                fullname.setText(interests);
-            }
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Profile profile = dataSnapshot.child("Users").child(userID).getValue(Profile.class);
-
-                String image = profile.getPhotoURL();
-                Picasso.get().load(image).into(profileImage);
-
-                String name = profile.getFullName();
-                fullname.setText(name);
-
-                String address = profile.getAddress();
-                fullname.setText(address);
-
-                String phone = profile.getPhone();
-                fullname.setText(phone);
-
-                String studyProgramme = profile.getStudyProgramme();
-                fullname.setText(studyProgramme);
-
-                String interests = profile.getInterests();
-                fullname.setText(interests);
-            }
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            }
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        };
-*/
-       /* mAuthListener = new FirebaseAuth.AuthStateListener() {
+        authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    userID = user.getUid();
-                    mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-                    Toast.makeText(MyProfileFragment.this.getActivity(),"User" + userID,Toast.LENGTH_SHORT).show();
-
-
+                if (user != null){
+                    Toast.makeText(MyProfileFragment.this.getActivity(),"User logged: " + user.getUid(), Toast.LENGTH_SHORT).show();
                 }
                 else{
                     startActivity(goBackToLogin);
                 }
             }
         };
-*/
 
-        //Toast.makeText(MyProfileFragment.this.getActivity(),"User" + userID,Toast.LENGTH_SHORT).show();
-
-
-
-      /*  mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
-               *//* String image = dataSnapshot.child("photoURL").getValue().toString();
-                String name = dataSnapshot.child("fullName").getValue().toString();
-                String addressText = dataSnapshot.child("address").getValue().toString();
-                String phoneText = dataSnapshot.child("phone").getValue().toString();
-                String programmeText = dataSnapshot.child("studyProgramme").getValue().toString();
-                String interestsText = dataSnapshot.child("interests").getValue().toString();*//*
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                    Profile profile = ds.getValue(Profile.class);
 
-                Profile profile = dataSnapshot.getValue(Profile.class);
-
-                Picasso.get().load(profile.getPhotoURL()).into(profileImage);
-                fullname.setText(profile.getFullName());
-                address.setText(profile.getAddress());
-                phone.setText(profile.getPhone());
-                programme.setText(profile.getStudyProgramme());
-                interests.setText(profile.getInterests());
+                    Picasso.get().load(profile.getPhotoURL()).into(profileImage);
+                    fullname.setText(profile.getFullName());
+                    address.setText(profile.getAddress());
+                    phone.setText(profile.getPhone());
+                    programme.setText(profile.getStudyProgramme());
+                    interests.setText(profile.getInterests());
+                }
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
-        });*/
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         return rootView;
     }
 
     public void onStart(){
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        mFirebaseAuth.addAuthStateListener(authStateListener);
     }
     public void onPause(){
         super.onPause();
-        mAuth.removeAuthStateListener(mAuthListener);
+        mFirebaseAuth.removeAuthStateListener(authStateListener);
     }
 }
