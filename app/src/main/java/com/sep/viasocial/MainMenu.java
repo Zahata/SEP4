@@ -1,5 +1,7 @@
 package com.sep.viasocial;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,13 +13,19 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.sep.viasocial.AccountAuthentication.LoginActivity;
 
 public class MainMenu extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private Intent backToLogout;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +44,32 @@ public class MainMenu extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        backToLogout = new Intent(MainMenu.this,LoginActivity.class);
+
+        /*mFirebaseAuth = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null){
+                    Toast.makeText(MainMenu.this,"User logged: " + user.getUid(),Toast.LENGTH_SHORT).show();
+
+                    //Toast.makeText(MyProfileFragment.this.getActivity(),"User logged: " + user.getUid(), Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    startActivity(backToLogout);
+                }
+            }
+        };*/
+
 
     }
 
-
-
-    @Override
+    private void goToLogin(){
+        startActivity(backToLogout);
+        finish();
+    }
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
         return true;
@@ -51,7 +79,9 @@ public class MainMenu extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.logOut) {
+            FirebaseAuth.getInstance().signOut();
+            goToLogin();
             return true;
         }
 

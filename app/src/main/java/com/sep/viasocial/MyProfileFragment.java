@@ -61,24 +61,26 @@ public class MyProfileFragment extends Fragment {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        FirebaseUser user = mFirebaseAuth.getCurrentUser();
-        userID = user.getUid();
+
+        //FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    Toast.makeText(MyProfileFragment.this.getActivity(),"User logged: " + user.getUid(), Toast.LENGTH_SHORT).show();
+                if (user == null){
+                    startActivity(goBackToLogin);
+                    //Toast.makeText(MyProfileFragment.this.getActivity(),"User logged: " + user.getUid(), Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    startActivity(goBackToLogin);
+                    userID = user.getUid();
+                    databaseReference = firebaseDatabase.getReference().child("Users").child(userID);
                 }
             }
         };
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+       /* databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
@@ -97,8 +99,7 @@ public class MyProfileFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
-
+        });*/
         return rootView;
     }
 
