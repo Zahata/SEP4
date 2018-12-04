@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.sep.viasocial.Chat.ChatMessage;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -67,7 +68,7 @@ public class SetupProfile extends AppCompatActivity {
         userID = user.getUid();
 
         mDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mDatabase.getReference().child("Users").child(userID);
+        mDatabaseReference = mDatabase.getReference().child("Users");
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference().child("Profile images");
@@ -98,7 +99,7 @@ public class SetupProfile extends AppCompatActivity {
                             phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString());
                     mDatabaseReference.push().setValue(profile);
                     Toast.makeText(SetupProfile.this,"Successful",Toast.LENGTH_SHORT).show();
-                    //startActivity(mainMenu);
+                    startActivity(mainMenu);
                 }
 
             }
@@ -123,6 +124,7 @@ public class SetupProfile extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                      downloadUrl = uri;
+                                    Picasso.get().load(downloadUrl).into(profileImage);
                                 }
 
                             });

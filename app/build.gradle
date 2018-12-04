@@ -45,6 +45,6 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:2.2.0' // circle image view
     implementation 'com.github.bumptech.glide:glide:3.6.1' //glide for picking images
-
+    implementation 'com.squareup.picasso:picasso:2.71828' //used to display and imageurl in an imageView
 }
 apply plugin: 'com.google.gms.google-services'
