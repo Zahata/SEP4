@@ -37,14 +37,9 @@ public class MyProfileFragment extends Fragment {
     private TextView phone;
     private TextView programme;
     private TextView interests;
-    private Intent goBackToLogin;
 
-    //private FirebaseDatabase firebaseDatabase;
-   // private FirebaseAuth mFirebaseAuth;
-   // private FirebaseAuth.AuthStateListener authStateListener;
     private DatabaseReference databaseReference;
     private FirebaseUser user;
-    //private String userID;
 
 
     @Override
@@ -58,7 +53,6 @@ public class MyProfileFragment extends Fragment {
         phone = rootView.findViewById(R.id.phone);
         programme = rootView.findViewById(R.id.studyProgramme);
         interests = rootView.findViewById(R.id.interests);
-        goBackToLogin = new Intent(MyProfileFragment.this.getActivity(),LoginActivity.class);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         String userID = user.getUid();
@@ -67,68 +61,18 @@ public class MyProfileFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                /*Toast.makeText(MyProfileFragment.this.getActivity(),dataSnapshot.toString(),Toast.LENGTH_LONG).show();
-                String name = dataSnapshot.child("fullName").getValue().toString();
-                fullname.setText(name);*/
                 Profile profile = dataSnapshot.getValue(Profile.class);
-                fullname.setText(profile.getFullName());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-       /* databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Profile profile = dataSnapshot.getValue(Profile.class);
-
-                // Picasso.get().load(profile.getPhotoURL()).into(profileImage);
+                Picasso.get().load(profile.getPhotoURL()).into(profileImage);
                 fullname.setText(profile.getFullName());
                 address.setText(profile.getAddress());
                 phone.setText(profile.getPhone());
                 programme.setText(profile.getStudyProgramme());
                 interests.setText(profile.getInterests());
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-        /*mFirebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();*/
-
-        //FirebaseUser user = mFirebaseAuth.getCurrentUser();
-
-
-        /*authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    userID = user.getUid();
-
-                    //Toast.makeText(MyProfileFragment.this.getActivity(),"User logged: " + user.getUid(), Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    startActivity(goBackToLogin);
-                }
-            }
-        };*/
-
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
 
         return rootView;
     }
-
-   /* public void onStart(){
-        super.onStart();
-        mFirebaseAuth.addAuthStateListener(authStateListener);
-    }
-    public void onPause(){
-        super.onPause();
-        mFirebaseAuth.removeAuthStateListener(authStateListener);
-    }*/
 }

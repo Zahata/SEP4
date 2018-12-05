@@ -51,6 +51,7 @@ public class SetupProfile extends AppCompatActivity {
 
     private Intent pickImage;
     private static final int RC_PHOTO_PICKER = 2;
+    private static final int ID = 1;
     private  Uri downloadUrl;
 
     public SetupProfile() {
@@ -62,10 +63,11 @@ public class SetupProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_profile);
 
-        mainMenu = new Intent(this,MainMenu.class);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
+        mainMenu = new Intent(this,MainMenu.class);
 
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference().child("Users");
@@ -97,7 +99,9 @@ public class SetupProfile extends AppCompatActivity {
                 if (user != null) {
                     Profile profile = new Profile(downloadUrl.toString(), nameText.getText().toString(), addressText.getText().toString(),
                             phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString());
-                    mDatabaseReference.push().setValue(profile);
+                    //mDatabaseReference.push().setValue(profile);
+                    mDatabaseReference.child(userID).setValue(profile); //push userid
+
                     Toast.makeText(SetupProfile.this,"Successful",Toast.LENGTH_SHORT).show();
                     startActivity(mainMenu);
                 }
