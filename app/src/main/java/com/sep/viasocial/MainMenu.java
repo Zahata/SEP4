@@ -28,13 +28,6 @@ public class MainMenu extends AppCompatActivity {
     private Intent backToLogin;
     private Intent groupChat;
     private FirebaseAuth mAuth;
-    //comment
-    //comment
-    //comment
-    //comment
-    //comment
-    //comment
-    //comment
 
 
     @Override
