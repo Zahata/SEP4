@@ -17,14 +17,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.sep.viasocial.AccountAuthentication.LoginActivity;
 
 public class MainMenu extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
-    private Intent backToLogout;
-    private FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
+    private Intent backToLogin;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -44,29 +44,24 @@ public class MainMenu extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        backToLogout = new Intent(MainMenu.this,LoginActivity.class);
+        backToLogin = new Intent(MainMenu.this,LoginActivity.class);
 
-        /*mFirebaseAuth = FirebaseAuth.getInstance();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null){
-                    Toast.makeText(MainMenu.this,"User logged: " + user.getUid(),Toast.LENGTH_SHORT).show();
-
-                    //Toast.makeText(MyProfileFragment.this.getActivity(),"User logged: " + user.getUid(), Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    startActivity(backToLogout);
-                }
-            }
-        };*/
+        mAuth = FirebaseAuth.getInstance();
 
 
     }
+    public void onStart(){
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user == null){
+            Intent start = new Intent(MainMenu.this, MainActivity.class);
+            startActivity(start);
+            finish();
+        }
+    }
 
     private void goToLogin(){
-        startActivity(backToLogout);
+        startActivity(backToLogin);
         finish();
     }
         @Override

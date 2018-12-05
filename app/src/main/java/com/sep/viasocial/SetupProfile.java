@@ -27,6 +27,8 @@ import com.google.firebase.storage.UploadTask;
 import com.sep.viasocial.Chat.ChatMessage;
 import com.squareup.picasso.Picasso;
 
+import java.net.URI;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SetupProfile extends AppCompatActivity {
@@ -35,7 +37,6 @@ public class SetupProfile extends AppCompatActivity {
     private String userID;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
-    private ChildEventListener mChildEventListener;
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
@@ -50,7 +51,6 @@ public class SetupProfile extends AppCompatActivity {
 
     private Intent pickImage;
     private static final int RC_PHOTO_PICKER = 2;
-    private Uri selectedImageUri;
     private  Uri downloadUrl;
 
     public SetupProfile() {
@@ -110,7 +110,7 @@ public class SetupProfile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
-            selectedImageUri = data.getData();
+            Uri selectedImageUri = data.getData();
 
             // Get a reference to store file at chat_photos/<FILENAME>
             final StorageReference photoRef = storageReference.child(selectedImageUri.getLastPathSegment());
