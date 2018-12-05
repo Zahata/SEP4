@@ -104,6 +104,7 @@ public class SetupProfile extends AppCompatActivity {
 
                     Toast.makeText(SetupProfile.this,"Successful",Toast.LENGTH_SHORT).show();
                     startActivity(mainMenu);
+                    finish();
                 }
 
             }
