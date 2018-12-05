@@ -18,12 +18,15 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.sep.viasocial.AccountAuthentication.LoginActivity;
+import com.sep.viasocial.Chat.ChatActivity;
 
 public class MainMenu extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private Intent backToLogin;
+    private Intent groupChat;
     private FirebaseAuth mAuth;
 
 
@@ -45,10 +48,11 @@ public class MainMenu extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         backToLogin = new Intent(MainMenu.this,LoginActivity.class);
+        groupChat = new Intent(MainMenu.this,ChatActivity.class);
 
         mAuth = FirebaseAuth.getInstance();
 
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
     public void onStart(){
         super.onStart();
@@ -59,7 +63,9 @@ public class MainMenu extends AppCompatActivity {
             finish();
         }
     }
-
+    private void goToGroupChat(){
+        startActivity(groupChat);
+    }
     private void goToLogin(){
         startActivity(backToLogin);
         finish();
@@ -78,6 +84,9 @@ public class MainMenu extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             goToLogin();
             return true;
+        }
+        if (id == R.id.groupChat){
+            goToGroupChat();
         }
 
         return super.onOptionsItemSelected(item);
