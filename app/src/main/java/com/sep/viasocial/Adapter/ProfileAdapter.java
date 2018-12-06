@@ -46,7 +46,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         final Profile profile = mProfiles.get(position);
         holder.username.setText(profile.getFullName());
         if (profile.getPhotoURL().equals("default")){ //change to empty
-            holder.profile_image.setImageResource(R.drawable.baseline_account_circle_black_48dp);
+            holder.profile_image.setImageResource(R.mipmap.ic_launcher_round);
         } else {
             Glide.with(mContext).load(profile.getPhotoURL()).into(holder.profile_image);
         }
