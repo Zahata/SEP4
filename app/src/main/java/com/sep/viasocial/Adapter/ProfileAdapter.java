@@ -74,7 +74,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", profile.getId()); //change to current user
+                intent.putExtra("userid", profile.getId());
                 mContext.startActivity(intent);
             }
         });
