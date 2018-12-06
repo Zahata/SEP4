@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sep.viasocial.AccountAuthentication.LoginActivity;
 import com.sep.viasocial.AccountAuthentication.RegisterActivity;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,4 +39,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(goToLogin);
         finish();
     }
+
 }

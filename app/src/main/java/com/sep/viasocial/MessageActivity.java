@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sep.viasocial.Model.Profile;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageActivity extends AppCompatActivity {
@@ -79,5 +81,22 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void Status(String status){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status",status);
+
+        reference.updateChildren(map);
+    }
+    protected void onResume(){
+        super.onResume();
+        Status("online");
+    }
+    protected void onPause(){
+        super.onPause();
+        Status("offline");
     }
 }
