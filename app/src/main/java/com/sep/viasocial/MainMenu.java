@@ -85,6 +85,7 @@ public class MainMenu extends AppCompatActivity {
         if (id == R.id.logOut) {
             FirebaseAuth.getInstance().signOut();
             goToLogin();
+            Status("offline");
             return true;
         }
         if (id == R.id.groupChat){
