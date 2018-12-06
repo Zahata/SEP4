@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sep.viasocial.MessageActivity;
-import com.sep.viasocial.Profile;
 import com.sep.viasocial.Model.Profile;
 import com.sep.viasocial.R;
 
@@ -44,7 +43,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Profile profile = mProfiles.get(position);
+        final Profile profile = mProfiles.get(position);
         holder.username.setText(profile.getFullName());
         if (profile.getPhotoURL().equals("default")){ //change to empty
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -75,7 +74,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", firebaseUser.getUid()); //change to current user
+                intent.putExtra("userid", profile.getId()); //change to current user
                 mContext.startActivity(intent);
             }
         });
