@@ -1,4 +1,4 @@
-package com.sep.viasocial.Chat;
+package com.sep.viasocial.Model;
 
 public class ChatMessage {
 

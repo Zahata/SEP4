@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".AccountAuthentication.LoginActivity" />
         <activity android:name=".AccountAuthentication.RegisterActivity" />
-        <activity android:name=".Chat.ChatActivity" />
+        <activity android:name=".ChatActivity" />
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_main_menu"

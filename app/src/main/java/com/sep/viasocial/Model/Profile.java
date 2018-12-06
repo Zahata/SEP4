@@ -1,4 +1,4 @@
-package com.sep.viasocial;
+package com.sep.viasocial.Model;
 
 public class Profile {
 
@@ -9,11 +9,12 @@ public class Profile {
     public String phone;
     public String studyProgramme;
     public String interests;
+    private String status;
 
 
     public Profile(){}
 
-    public Profile(String id,String photo, String name, String address,String phone, String programme, String interests){
+    public Profile(String id,String photo, String name, String address,String phone, String programme, String interests,String status){
         this.id = id;
         this.photoURL = photo;
         this.fullName = name;
@@ -21,6 +22,7 @@ public class Profile {
         this.phone = phone;
         this.studyProgramme = programme;
         this.interests = interests;
+        this.status = status;
     }
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
@@ -66,4 +68,7 @@ public class Profile {
     public void setInterests(String interests) {
         this.interests = interests;
     }
+
+    public String getStatus() {return status;}
+    public void setStatus(String status){this.status = status;}
 }

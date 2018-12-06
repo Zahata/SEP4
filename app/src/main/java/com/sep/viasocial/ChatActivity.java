@@ -1,4 +1,4 @@
-package com.sep.viasocial.Chat;
+package com.sep.viasocial;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,13 +18,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 //import android.widget.ProgressBar;
 //import android.widget.Toast;
 
 //import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -40,6 +38,8 @@ import com.google.firebase.storage.UploadTask;
 
 
 //import com.sep.viasocial.AccountAuthentication.LoginActivity;
+import com.sep.viasocial.Adapter.ChatAdapter;
+import com.sep.viasocial.Model.ChatMessage;
 import com.sep.viasocial.R;
 
 import java.util.ArrayList;
@@ -67,7 +67,6 @@ public class ChatActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
     private FirebaseStorage mStorage;
     private StorageReference mChatPhotosStorageReference;
-    //private FirebaseRemoteConfig mRemoteConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +79,6 @@ public class ChatActivity extends AppCompatActivity {
         // Initialize Firebase components
         mDatabase = FirebaseDatabase.getInstance();
         mStorage = FirebaseStorage.getInstance();
-        //mRemoteConfig = FirebaseRemoteConfig.getInstance();
 
         mDatabaseReference = mDatabase.getReference().child("messages");
         mChatPhotosStorageReference = mStorage.getReference().child("chat_photos");
@@ -188,19 +186,6 @@ public class ChatActivity extends AppCompatActivity {
                             });
                         }
                     });
-
-            /*
-            .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // When the image has successfully uploaded, we get its download URL
-                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
-
-                            // Set the download URL to the message box, so that the user can send it to the database
-                            ChatMessage message = new ChatMessage(null, mUsername, downloadUrl.toString());
-                            mDatabaseReference.push().setValue(message);
-                        }
-                    });
-             */
         }
     }
 }

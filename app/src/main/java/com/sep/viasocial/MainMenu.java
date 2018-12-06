@@ -1,7 +1,6 @@
 package com.sep.viasocial;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,14 +12,17 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sep.viasocial.AccountAuthentication.LoginActivity;
-import com.sep.viasocial.Chat.ChatActivity;
+import com.sep.viasocial.Fragments.ChatsFragment;
+import com.sep.viasocial.Fragments.FriendsFragment;
+import com.sep.viasocial.Fragments.MyProfileFragment;
+
+import java.util.HashMap;
 
 public class MainMenu extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -47,7 +49,7 @@ public class MainMenu extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        backToLogin = new Intent(MainMenu.this,LoginActivity.class);
+        backToLogin = new Intent(MainMenu.this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         groupChat = new Intent(MainMenu.this,ChatActivity.class);
 
         mAuth = FirebaseAuth.getInstance();
@@ -121,5 +123,22 @@ public class MainMenu extends AppCompatActivity {
         public int getCount() {
             return 3;
         }
+    }
+    public void Status(String status){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status",status);
+
+        reference.updateChildren(map);
+    }
+    protected void onResume(){
+        super.onResume();
+        Status("online");
+    }
+    protected void onPause(){
+        super.onPause();
+        Status("offline");
     }
 }
