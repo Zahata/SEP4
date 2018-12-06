@@ -30,8 +30,8 @@
 
         <ImageButton
             android:id="@+id/photoPickerButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@android:drawable/ic_menu_gallery"
             android:contentDescription="Image"/>
 
@@ -42,15 +42,15 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:inputType="text"
-            android:autofillHints="Aa"/>
+            android:hint="Type a message..."/>
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_action_name"
             android:layout_gravity="bottom"
-            android:enabled="false"
-            android:text="@string/send_button_label"/>
+            android:enabled="false"/>
 
     </LinearLayout>
 </RelativeLayout>
