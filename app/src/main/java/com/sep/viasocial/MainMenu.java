@@ -52,7 +52,7 @@ public class MainMenu extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
     }
     public void onStart(){
         super.onStart();
