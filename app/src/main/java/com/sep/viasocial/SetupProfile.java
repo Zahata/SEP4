@@ -2,32 +2,23 @@ package com.sep.viasocial;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.sep.viasocial.Chat.ChatMessage;
+import com.sep.viasocial.Model.Profile;
 import com.squareup.picasso.Picasso;
-
-import java.net.URI;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,7 +42,6 @@ public class SetupProfile extends AppCompatActivity {
 
     private Intent pickImage;
     private static final int RC_PHOTO_PICKER = 2;
-    private static final int ID = 1;
     private  Uri downloadUrl;
 
     public SetupProfile() {
@@ -97,8 +87,8 @@ public class SetupProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (user != null) {
-                    Profile profile = new Profile(downloadUrl.toString(), nameText.getText().toString(), addressText.getText().toString(),
-                            phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString());
+                    Profile profile = new Profile(userID,downloadUrl.toString(), nameText.getText().toString(), addressText.getText().toString(),
+                            phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString(),"offline");
                     //mDatabaseReference.push().setValue(profile);
                     mDatabaseReference.child(userID).setValue(profile); //push userid
 

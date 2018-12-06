@@ -1,4 +1,4 @@
-package com.sep.viasocial.Chat;
+package com.sep.viasocial.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.sep.viasocial.Model.ChatMessage;
 import com.sep.viasocial.R;
 
 import java.util.List;

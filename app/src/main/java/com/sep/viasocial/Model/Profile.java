@@ -1,34 +1,35 @@
-package com.sep.viasocial;
-
-import android.net.Uri;
-
-import java.net.URI;
+package com.sep.viasocial.Model;
 
 public class Profile {
 
+    public String id;
     public String photoURL;
     public String fullName;
     public String address;
     public String phone;
     public String studyProgramme;
     public String interests;
+    private String status;
 
 
     public Profile(){}
 
-    public Profile(String photo, String name, String address,String phone, String programme, String interests){
+    public Profile(String id,String photo, String name, String address,String phone, String programme, String interests,String status){
+        this.id = id;
         this.photoURL = photo;
         this.fullName = name;
         this.address = address;
         this.phone = phone;
         this.studyProgramme = programme;
         this.interests = interests;
+        this.status = status;
     }
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
 
     public String getPhotoURL() {
         return photoURL;
     }
-
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
@@ -36,7 +37,6 @@ public class Profile {
     public String getFullName() {
         return fullName;
     }
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -44,20 +44,20 @@ public class Profile {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getPhone() {
         return phone;
     }
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
     public String getStudyProgramme() {
         return studyProgramme;
     }
-
     public void setStudyProgramme(String studyProgramme) {
         this.studyProgramme = studyProgramme;
     }
@@ -65,8 +65,10 @@ public class Profile {
     public String getInterests() {
         return interests;
     }
-
     public void setInterests(String interests) {
         this.interests = interests;
     }
+
+    public String getStatus() {return status;}
+    public void setStatus(String status){this.status = status;}
 }

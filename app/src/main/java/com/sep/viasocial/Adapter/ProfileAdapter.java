@@ -15,24 +15,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sep.viasocial.MessageActivity;
 import com.sep.viasocial.Profile;
+import com.sep.viasocial.Model.Profile;
 import com.sep.viasocial.R;
 
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
-    final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
     private Context mContext;
     private List<Profile> mProfiles;
-    // private boolean ischat;
+    private boolean ischat;
 
     //String theLastMessage;
 
-    public ProfileAdapter(Context mContext, List<Profile> mProfiles){ //, boolean ischat){
+    public ProfileAdapter(Context mContext, List<Profile> mProfiles, boolean ischat){
         this.mProfiles = mProfiles;
         this.mContext = mContext;
-        //this.ischat = ischat;
+        this.ischat = ischat;
     }
 
     @NonNull
@@ -57,10 +56,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             lastMessage(user.getId(), holder.last_msg);
         } else {
             holder.last_msg.setVisibility(View.GONE);
-        }
+        }*/
 
         if (ischat){
-            if (user.getStatus().equals("online")){
+            if (profile.getStatus().equals("online")){
                 holder.img_on.setVisibility(View.VISIBLE);
                 holder.img_off.setVisibility(View.GONE);
             } else {
@@ -70,7 +69,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         } else {
             holder.img_on.setVisibility(View.GONE);
             holder.img_off.setVisibility(View.GONE);
-        }*/
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +90,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
         public TextView username;
         public ImageView profile_image;
-        //private ImageView img_on;
-        //private ImageView img_off;
+        private ImageView img_on;
+        private ImageView img_off;
         //private TextView last_msg;
 
         public ViewHolder(View itemView) {
@@ -100,8 +99,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
             username = itemView.findViewById(R.id.username);
             profile_image = itemView.findViewById(R.id.profile_image);
-            //img_on = itemView.findViewById(R.id.img_on);
-            //img_off = itemView.findViewById(R.id.img_off);
+            img_on = itemView.findViewById(R.id.img_on);
+            img_off = itemView.findViewById(R.id.img_off);
             //last_msg = itemView.findViewById(R.id.last_msg);
         }
     }

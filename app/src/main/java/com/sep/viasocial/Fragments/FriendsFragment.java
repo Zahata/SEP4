@@ -1,10 +1,9 @@
-package com.sep.viasocial;
+package com.sep.viasocial.Fragments;
 
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sep.viasocial.Adapter.ProfileAdapter;
+import com.sep.viasocial.Model.Profile;
+import com.sep.viasocial.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class FriendsFragment extends Fragment {
                     }
                 }
 
-                profileAdapter = new ProfileAdapter(getContext(), mProfiles);
+                profileAdapter = new ProfileAdapter(getContext(), mProfiles,false);
                 mUsersList.setAdapter(profileAdapter);
                 //}
             }
