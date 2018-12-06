@@ -11,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.sep.viasocial.MessageActivity;
 import com.sep.viasocial.Profile;
 import com.sep.viasocial.R;
 
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
+
+    final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     private Context mContext;
     private List<Profile> mProfiles;
@@ -67,14 +72,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             holder.img_off.setVisibility(View.GONE);
         }*/
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", user.getId());
+                intent.putExtra("userid", firebaseUser.getUid()); //change to current user
                 mContext.startActivity(intent);
             }
-        });*/
+        });
     }
 
     @Override
