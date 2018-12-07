@@ -20,32 +20,30 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    // Displaying images
-    implementation 'com.github.bumptech.glide:glide:3.6.1' //to update it
+    //implementation 'com.android.support:cardview-v7:28.0.0'
 
     // Firebase
-    implementation 'com.google.firebase:firebase-core:16.0.5' //firebase core
+    implementation 'com.google.firebase:firebase-core:16.0.6' //firebase core
     implementation 'com.google.firebase:firebase-auth:16.0.5' //firebase authentication
     implementation 'com.google.firebase:firebase-database:16.0.5' //firebase database
     implementation 'com.google.firebase:firebase-storage:16.0.5' //firebase storage
     implementation 'com.google.firebase:firebase-messaging:17.3.4' //firebase messaging
-    implementation 'com.google.firebase:firebase-config:16.1.0' //firebase config
+    implementation 'com.google.firebase:firebase-config:16.1.2' //firebase config
 
-
+    //implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'de.hdodenhof:circleimageview:2.2.0' // circle image view
-    implementation 'com.github.bumptech.glide:glide:3.6.1' //glide for picking images
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    //used to display and imageurl in an imageView
+    implementation 'com.github.bumptech.glide:glide:4.8.0' //glide for picking images
+    implementation 'com.squareup.picasso:picasso:2.71828' //used to display and imageurl in an imageView
+    //implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    //implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 apply plugin: 'com.google.gms.google-services'

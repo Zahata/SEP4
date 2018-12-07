@@ -57,7 +57,7 @@ public class SetupProfile extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
-        mainMenu = new Intent(this,MainMenu.class);
+        mainMenu = new Intent(this,MainActivity.class);
 
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference().child("Users");

@@ -11,7 +11,6 @@ public class Profile {
     public String interests;
     private String status;
 
-
     public Profile(){}
 
     public Profile(String id,String photo, String name, String address,String phone, String programme, String interests,String status){
