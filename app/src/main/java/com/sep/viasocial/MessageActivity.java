@@ -63,7 +63,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // and this
                 finish();
-                //startActivity(new Intent(MessageActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                //startActivity(new Intent(MessageActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });*/
 
