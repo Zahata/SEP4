@@ -66,8 +66,15 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                 holder.img_off.setVisibility(View.VISIBLE);
             }
         } else {
-            holder.img_on.setVisibility(View.GONE);
-            holder.img_off.setVisibility(View.GONE);
+            /*holder.img_on.setVisibility(View.GONE);
+            holder.img_off.setVisibility(View.GONE);*/
+            if (profile.getStatus().equals("online")){ //check how it works
+                holder.img_on.setVisibility(View.VISIBLE);
+                holder.img_off.setVisibility(View.GONE);
+            } else {
+                holder.img_on.setVisibility(View.GONE);
+                holder.img_off.setVisibility(View.VISIBLE);
+            }
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

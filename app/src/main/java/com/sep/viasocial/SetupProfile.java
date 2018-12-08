@@ -87,8 +87,7 @@ public class SetupProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (user != null) {
-                    Profile profile = new Profile(userID,downloadUrl.toString(), nameText.getText().toString(), addressText.getText().toString(),
-                            phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString(),"offline");
+                    Profile profile = new Profile(userID, downloadUrl.toString(), nameText.getText().toString(), addressText.getText().toString(), phoneText.getText().toString(), programmeText.getText().toString(), interestsText.getText().toString(),"offline");
                     //mDatabaseReference.push().setValue(profile);
                     mDatabaseReference.child(userID).setValue(profile); //push userid
 

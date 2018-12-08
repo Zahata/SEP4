@@ -1,6 +1,7 @@
 package com.sep.viasocial.Fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,9 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.sep.viasocial.Adapter.ProfileAdapter;
+import com.sep.viasocial.Model.GroupChat;
 import com.sep.viasocial.Model.Profile;
 import com.sep.viasocial.R;
 
@@ -30,8 +37,7 @@ public class ChatsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chats,container,false);
 
         recyclerView = view.findViewById(R.id.chatWithRecycler);
@@ -40,14 +46,14 @@ public class ChatsFragment extends Fragment {
 
         chats = new ArrayList<>();
 
-        /*user = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Chats"); //.child(user.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chats.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    PrivateChat chat = snapshot.getValue(PrivateChat.class);
+                    GroupChat chat = snapshot.getValue(GroupChat.class);
 
                     if(chat.getSender().equals(user.getUid())){
                         chats.add(chat.getReceiver());
@@ -63,14 +69,11 @@ public class ChatsFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
-
-
-
+        });
         return view;
     }
 
-  /*  private void readChats() {
+    private void readChats() {
         users = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -84,10 +87,10 @@ public class ChatsFragment extends Fragment {
 
                     // display a user from chats
                     for(String id: chats){
-                        if(profile.getId().equalsIgnoreCase(id)){
+                        if(profile.getId().equals(id)){ //verify this one   .equalsIgnoreCase
                             if(users.size() != 0){
                                 for(Profile otherProfile: users){
-                                    if(!profile.getId().equalsIgnoreCase(otherProfile.getId())){
+                                    if(!profile.getId().equals(otherProfile.getId())){
                                         users.add(profile);
                                     }
                                 }
@@ -103,5 +106,5 @@ public class ChatsFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
-    }*/
+    }
 }

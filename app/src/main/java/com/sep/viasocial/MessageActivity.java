@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sep.viasocial.Adapter.MessageAdapter;
-import com.sep.viasocial.Model.Chat;
+import com.sep.viasocial.Model.GroupChat;
 import com.sep.viasocial.Model.Profile;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class MessageActivity extends AppCompatActivity {
     EditText text_send;
 
     MessageAdapter messageAdapter;
-    List<Chat> mchat;
+    List<GroupChat> mchat;
 
     RecyclerView recyclerView;
     Intent intent;
@@ -62,7 +61,7 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // and this
-                finish();
+                //finish();
                 //startActivity(new Intent(MessageActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });*/
@@ -186,10 +185,10 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mchat.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(myId) && chat.getSender().equals(userid) ||
-                            chat.getReceiver().equals(userid) && chat.getSender().equals(myId)){
-                        mchat.add(chat);
+                    GroupChat groupChat = snapshot.getValue(GroupChat.class);
+                    if (groupChat.getReceiver().equals(myId) && groupChat.getSender().equals(userid) ||
+                            groupChat.getReceiver().equals(userid) && groupChat.getSender().equals(myId)){
+                        mchat.add(groupChat);
                     }
 
                     messageAdapter = new MessageAdapter(MessageActivity.this, mchat, imageurl);
@@ -202,5 +201,24 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void Status(String status){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status",status);
+
+        reference.updateChildren(map);
+    }
+
+    protected void onResume(){
+        super.onResume();
+        Status("online");
+    }
+
+    protected void onPause(){
+        super.onPause();
+        Status("offline");
     }
 }

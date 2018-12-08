@@ -40,9 +40,9 @@ import com.google.firebase.storage.UploadTask;
 //import com.sep.viasocial.AccountAuthentication.LoginActivity;
 import com.sep.viasocial.Adapter.ChatAdapter;
 import com.sep.viasocial.Model.ChatMessage;
-import com.sep.viasocial.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -71,7 +71,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_group_chat);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mUsername = user.getEmail();
@@ -170,22 +170,40 @@ public class ChatActivity extends AppCompatActivity {
             final StorageReference photoRef = mChatPhotosStorageReference.child(selectedImageUri.getLastPathSegment());
 
             // Upload file to Firebase Storage
-            photoRef.putFile(selectedImageUri)
-                    .addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            photoRef.putFile(selectedImageUri).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // When the image has successfully uploaded, we get its download URL
-                            photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    final Uri downloadUrl = uri;
+                // When the image has successfully uploaded, we get its download URL
+                photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        final Uri downloadUrl = uri;
 
-                                    // Set the download URL to the message box, so that the user can send it to the database
-                                    ChatMessage message = new ChatMessage(null, mUsername, downloadUrl.toString());
-                                    mDatabaseReference.push().setValue(message);
-                                }
-                            });
-                        }
-                    });
+                        // Set the download URL to the message box, so that the user can send it to the database
+                        ChatMessage message = new ChatMessage(null, mUsername, downloadUrl.toString());
+                        mDatabaseReference.push().setValue(message);
+                    }
+                });
+                }
+            });
         }
+    }
+
+    public void Status(String status){
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status",status);
+
+        mDatabaseReference.updateChildren(map);
+    }
+
+    protected void onResume(){
+        super.onResume();
+        Status("online");
+    }
+
+    protected void onPause(){
+        super.onPause();
+        Status("offline");
     }
 }

@@ -26,6 +26,6 @@
     <string name="phone">Please enter your phone number</string>
     <string name="saveButton">Save</string>
     <string name="logoutText">Log out</string>
-    <string name="groupChatText">Group chat</string>
+    <string name="groupChatText">Group Chat</string>
     <string name="username">username</string>
 </resources>

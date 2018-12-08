@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.sep.viasocial.Model.Chat;
+import com.sep.viasocial.Model.GroupChat;
 import com.sep.viasocial.R;
 
 import java.util.List;
@@ -23,13 +23,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public static final int MSG_TYPE_RIGHT = 1;
 
     private Context mContext;
-    private List<Chat> mChat;
+    private List<GroupChat> mGroupChat;
     private String imageurl;
 
     FirebaseUser fUser;
 
-    public MessageAdapter(Context mContext, List<Chat> mChat, String imageurl){
-        this.mChat = mChat;
+    public MessageAdapter(Context mContext, List<GroupChat> mGroupChat, String imageurl){
+        this.mGroupChat = mGroupChat;
         this.mContext = mContext;
         this.imageurl = imageurl;
     }
@@ -49,9 +49,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
-        Chat chat = mChat.get(position);
+        GroupChat groupChat = mGroupChat.get(position);
 
-        holder.show_message.setText(chat.getMessage());
+        holder.show_message.setText(groupChat.getMessage());
 
         if (imageurl.equals("default")){ //set to empty
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -59,8 +59,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Glide.with(mContext).load(imageurl).into(holder.profile_image);
         }
 
-        /*if (position == mChat.size()-1){
-            if (chat.isIsseen()){
+        /*if (position == mGroupChat.size()-1){
+            if (groupChat.isIsseen()){
                 holder.txt_seen.setText("Seen");
             } else {
                 holder.txt_seen.setText("Delivered");
@@ -72,7 +72,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return mChat.size();
+        return mGroupChat.size();
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
@@ -92,7 +92,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public int getItemViewType(int position) {
         fUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (mChat.get(position).getSender().equals(fUser.getUid())){
+        if (mGroupChat.get(position).getSender().equals(fUser.getUid())){
             return MSG_TYPE_RIGHT;
         } else {
             return MSG_TYPE_LEFT;
