@@ -30,10 +30,10 @@
 
         <ImageButton
             android:id="@+id/photoPickerButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@android:drawable/ic_menu_gallery"
-            android:contentDescription="Image"/>
+            android:contentDescription="@string/image_content"/>
 
         <EditText
             android:id="@+id/messageEditText"
@@ -42,12 +42,12 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:inputType="text"
-            android:hint="Type a message..."/>
+            android:hint="@string/type_a_message"/>
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@drawable/ic_action_name"
             android:layout_gravity="bottom"
             android:enabled="false"/>

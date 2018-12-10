@@ -19,10 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sep.viasocial.AccountAuthentication.LoginActivity;
 import com.sep.viasocial.Fragments.ChatsFragment;
-import com.sep.viasocial.Fragments.FriendsFragment;
+import com.sep.viasocial.Fragments.UsersFragment;
 import com.sep.viasocial.Fragments.MyProfileFragment;
-
-import java.util.HashMap;
 
 import java.util.HashMap;
 
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new FriendsFragment();
+                    return new UsersFragment();
 
                 case 1:
                     return new ChatsFragment();
