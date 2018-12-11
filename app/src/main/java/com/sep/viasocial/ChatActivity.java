@@ -196,7 +196,7 @@ public class ChatActivity extends AppCompatActivity {
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("status",status);
-
+sadasdasd
         mDatabaseReference.updateChildren(map);
     }
 
