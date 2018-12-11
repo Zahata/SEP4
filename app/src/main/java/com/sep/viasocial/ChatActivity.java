@@ -188,7 +188,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public void Status(String status){
+    /*public void Status(String status){
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
 
         HashMap<String, Object> map = new HashMap<>();
@@ -205,5 +205,5 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
         Status("offline");
-    }
+    }*/
 }
