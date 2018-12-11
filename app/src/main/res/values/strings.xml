@@ -13,7 +13,7 @@
     <string name="emailHint">Enter your email</string>
     <string name="nameHint">Enter First and Last name</string>
     <string name="registrationLabel">Registration</string>
-    <string name="title_activity_main_menu">VIA Social</string>
+    <string name="title_activity_main">VIA Social</string>
     <string name="tab_text_1">Users</string>
     <string name="tab_text_2">Chats</string>
     <string name="tab_text_3">My profile</string>
@@ -28,7 +28,4 @@
     <string name="logoutText">Log out</string>
     <string name="groupChatText">Group Chat</string>
     <string name="username">username</string>
-    <string name="info">info</string>
-    <string name="type_a_message">Type a message...</string>
-    <string name="image_content">Image</string>
 </resources>

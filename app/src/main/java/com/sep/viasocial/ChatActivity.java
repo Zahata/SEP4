@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 //import android.widget.ProgressBar;
 //import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 //import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 //import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -40,6 +42,7 @@ import com.google.firebase.storage.UploadTask;
 //import com.sep.viasocial.AccountAuthentication.LoginActivity;
 import com.sep.viasocial.Adapter.ChatAdapter;
 import com.sep.viasocial.Model.ChatMessage;
+import com.sep.viasocial.Model.Profile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +77,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_chat);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        mUsername = user.getEmail();
+        mUsername = user.getDisplayName();
 
         // Initialize Firebase components
         mDatabase = FirebaseDatabase.getInstance();
@@ -188,7 +191,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public void Status(String status){
+    /*public void Status(String status){
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
 
         HashMap<String, Object> map = new HashMap<>();
@@ -205,5 +208,5 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
         Status("offline");
-    }
+    }*/
 }
