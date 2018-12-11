@@ -24,7 +24,7 @@ import com.sep.viasocial.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendsFragment extends Fragment {
+public class UsersFragment extends Fragment {
 
     //private Toolbar mToolbar;
     private RecyclerView mUsersList;
@@ -35,7 +35,7 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_friends, container, false);
+        View view = inflater.inflate(R.layout.fragment_users, container, false);
 
         mUsersList = view.findViewById(R.id.users_list);
         mUsersList.setHasFixedSize(true);
@@ -73,9 +73,7 @@ public class FriendsFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
     }
 }

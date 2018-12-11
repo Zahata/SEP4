@@ -14,7 +14,7 @@
     <string name="nameHint">Enter First and Last name</string>
     <string name="registrationLabel">Registration</string>
     <string name="title_activity_main">VIA Social</string>
-    <string name="tab_text_1">Friends</string>
+    <string name="tab_text_1">Users</string>
     <string name="tab_text_2">Chats</string>
     <string name="tab_text_3">My profile</string>
     <string name="action_settings">Settings</string>

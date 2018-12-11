@@ -24,8 +24,9 @@
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
-        <activity android:name="SetupProfile"></activity>
+        <activity android:name=".SetupProfile"></activity>
         <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".Model.OtherProfile"></activity>
     </application>
 
 </manifest>

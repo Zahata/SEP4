@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sep.viasocial.Adapter.MessageAdapter;
 import com.sep.viasocial.Model.GroupChat;
+import com.sep.viasocial.Model.OtherProfile;
 import com.sep.viasocial.Model.Profile;
 
 import java.util.ArrayList;
@@ -109,7 +113,7 @@ public class MessageActivity extends AppCompatActivity {
                     Glide.with(getApplicationContext()).load(profile.getPhotoURL()).into(profile_image);
                 }
 
-                readMesagges(fUser.getUid(), userid, profile.getPhotoURL());
+                readMessages(fUser.getUid(), userid, profile.getPhotoURL());
             }
 
             @Override
@@ -176,7 +180,7 @@ public class MessageActivity extends AppCompatActivity {
         });*/
     }
 
-    private void readMesagges(final String myId, final String userid, final String imageurl){
+    private void readMessages(final String myId, final String userid, final String imageurl){
         mchat = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Chats");
@@ -201,6 +205,25 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.other_profile, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.profileInfo:
+                Intent otherProfile = new Intent(MessageActivity.this, OtherProfile.class);
+                otherProfile.putExtra("userid", userid);
+                startActivity(otherProfile);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void Status(String status){
