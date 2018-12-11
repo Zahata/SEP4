@@ -38,7 +38,7 @@ public class SetupProfile extends AppCompatActivity {
     private EditText programmeText;
     private EditText interestsText;
     private Button saveButton;
-    private Intent mainMenu;
+    private Intent mainActivity;
 
     private Intent pickImage;
     private static final int RC_PHOTO_PICKER = 2;
@@ -57,7 +57,7 @@ public class SetupProfile extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
-        mainMenu = new Intent(this,MainActivity.class);
+        mainActivity = new Intent(this, MainActivity.class);
 
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference().child("Users");
@@ -92,7 +92,7 @@ public class SetupProfile extends AppCompatActivity {
                     mDatabaseReference.child(userID).setValue(profile); //push userid
 
                     Toast.makeText(SetupProfile.this,"Successful",Toast.LENGTH_SHORT).show();
-                    startActivity(mainMenu);
+                    startActivity(mainActivity);
                     finish();
                 }
 

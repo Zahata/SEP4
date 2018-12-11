@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailLoginText;
     private EditText passwordLoginText;
-    private Intent mainMenu;
+    private Intent mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         emailLoginText = findViewById(R.id.emailLoginText);
         passwordLoginText = findViewById(R.id.passwordLoginText);
 
-        mainMenu = new Intent(this,MainActivity.class);
+        mainActivity = new Intent(this,MainActivity.class);
     }
 
     public void login(View v){
@@ -52,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    mainMenu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(mainMenu);
+                    mainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(mainActivity);
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Authentication failed!", Toast.LENGTH_SHORT).show();
