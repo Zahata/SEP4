@@ -30,4 +30,5 @@
     <string name="username">username</string>
     <string name="type_a_message">Type a message...</string>
     <string name="image_content">Image</string>
+    <string name="info">info</string>
 </resources>

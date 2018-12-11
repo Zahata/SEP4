@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Model.OtherProfile">
-
+    tools:context=".OtherProfile">
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profileImageOther"
         android:layout_width="144dp"
@@ -19,7 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImageOther"
         app:layout_constraintVertical_bias="0.162">
-
         <TextView
             android:id="@+id/fullNameOther"
             android:layout_width="match_parent"
@@ -42,7 +39,6 @@
             android:layout_margin="15dp"
             android:textAlignment="center"
             android:textSize="18sp" />
-
         <TextView
             android:id="@+id/studyProgrammeOther"
             android:layout_width="match_parent"
@@ -51,7 +47,6 @@
             android:layout_margin="15dp"
             android:textAlignment="center"
             android:textSize="18sp" />
-
         <TextView
             android:id="@+id/addressOther"
             android:layout_width="match_parent"
@@ -60,7 +55,6 @@
             android:layout_margin="15dp"
             android:textAlignment="center"
             android:textSize="18sp" />
-
         <TextView
             android:id="@+id/phoneOther"
             android:layout_width="match_parent"
@@ -69,7 +63,6 @@
             android:layout_margin="15dp"
             android:textAlignment="center"
             android:textSize="18sp" />
-
         <TextView
             android:id="@+id/interestsOther"
             android:layout_width="match_parent"
@@ -78,7 +71,5 @@
             android:layout_margin="15dp"
             android:textAlignment="center"
             android:textSize="18sp" />
-
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
