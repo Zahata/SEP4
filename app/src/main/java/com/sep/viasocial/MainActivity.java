@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.logOut) { //change this code beacuse app crashes
             FirebaseAuth.getInstance().signOut();
-            Status("offline");
             startActivity(backToLogin);
             finish(); //check this one
             return true;
