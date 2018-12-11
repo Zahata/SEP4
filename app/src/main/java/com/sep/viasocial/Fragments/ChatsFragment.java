@@ -34,7 +34,7 @@ public class ChatsFragment extends Fragment {
 
     private FirebaseUser user;
     private DatabaseReference databaseReference;
-
+//
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
