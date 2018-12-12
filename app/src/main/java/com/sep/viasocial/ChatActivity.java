@@ -48,14 +48,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity { //comment this class
 
     public static final String ANONYMOUS = "anonymous";
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
 
     private static final int RC_PHOTO_PICKER = 2;
 
-    private ListView mMessageListView;
+    //***private ListView mMessageListView;
     private ChatAdapter mChatAdapter;
     private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
@@ -87,7 +87,7 @@ public class ChatActivity extends AppCompatActivity {
         mChatPhotosStorageReference = mStorage.getReference().child("chat_photos");
 
         // Initialize references to views
-        mMessageListView = findViewById(R.id.messageListView);
+        //***mMessageListView = findViewById(R.id.messageListView);
         mPhotoPickerButton = findViewById(R.id.photoPickerButton);
         mMessageEditText = findViewById(R.id.messageEditText);
         mSendButton = findViewById(R.id.sendButton);
@@ -95,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
         // Initialize message ListView and its adapter
         List<ChatMessage> messages = new ArrayList<>();
         mChatAdapter = new ChatAdapter(this, R.layout.chat_message, messages);
-        mMessageListView.setAdapter(mChatAdapter);
+        //***mMessageListView.setAdapter(mChatAdapter);
 
         // ImagePickerButton shows an image picker to upload a image for a message
         mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/left_item_layout"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:padding="8dp">
@@ -9,19 +10,46 @@
         android:id="@+id/profile_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_alignBottom="@+id/relativeLayout"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/show_message"
+        android:id="@+id/author_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_left_message"
-        android:layout_toRightOf="@id/profile_image"
-        android:layout_marginLeft="5dp"
-        android:text="message"
-        android:textSize="18sp"
-        android:textColor="#000"
-        android:padding="8dp"/>
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/profile_image"
+        android:padding="5dp"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RelativeLayout
+        android:id="@id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/author_name"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/profile_image">
+
+        <ImageView
+            android:id="@+id/show_image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/background_left_message"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/show_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_left_message"
+            android:padding="8dp"
+            android:text="message"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 
     <!--<TextView
         android:id="@+id/txt_seen"

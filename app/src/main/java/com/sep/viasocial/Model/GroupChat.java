@@ -1,15 +1,19 @@
 package com.sep.viasocial.Model;
 
 public class GroupChat {
+
     private String sender;
     private String receiver;
     private String message;
+    private String username;
+    private String photoUrl;
     //private boolean isseen;
 
-    public GroupChat(String sender, String receiver, String message){ //, boolean isseen) {
+    public GroupChat(String sender, String receiver, String message, String photoUrl){ //, boolean isseen) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
+        this.photoUrl = photoUrl;
         //this.isseen = isseen;
     }
 
@@ -38,6 +42,14 @@ public class GroupChat {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     /*public boolean isIsseen() {

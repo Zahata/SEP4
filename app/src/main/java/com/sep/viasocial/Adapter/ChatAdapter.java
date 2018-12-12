@@ -15,6 +15,10 @@ import com.sep.viasocial.R;
 import java.util.List;
 
 public class ChatAdapter extends ArrayAdapter<ChatMessage> {
+
+    public static final int MSG_TYPE_LEFT = 0;
+    public static final int MSG_TYPE_RIGHT = 1;
+
     public ChatAdapter(Context context, int resource, List<ChatMessage> objects) {
         super(context, resource, objects);
     }

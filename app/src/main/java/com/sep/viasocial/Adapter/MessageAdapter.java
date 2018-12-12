@@ -51,7 +51,21 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         GroupChat groupChat = mGroupChat.get(position);
 
-        holder.show_message.setText(groupChat.getMessage());
+        boolean isPhoto = groupChat.getPhotoUrl() != null;
+        if (isPhoto) {
+            holder.show_message.setVisibility(View.GONE);
+            holder.show_image.setVisibility(View.VISIBLE);
+            Glide.with(holder.show_image.getContext()) //change to mContext
+                    .load(groupChat.getPhotoUrl())
+                    .into(holder.show_image);
+        } else {
+            holder.show_message.setVisibility(View.VISIBLE);
+            holder.show_image.setVisibility(View.GONE);
+            holder.show_message.setText(groupChat.getMessage());
+        }
+        holder.author_name.setText(groupChat.getSender()); //check this one
+
+        //holder.show_message.setText(groupChat.getMessage());
 
         if (imageurl.equals("default")){ //set to empty
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -76,15 +90,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView show_message;
+
         public ImageView profile_image;
+        public TextView author_name;
+        public TextView show_message;
+        public ImageView show_image;
         //public TextView txt_seen;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
+            author_name = itemView.findViewById(R.id.author_name);
+            show_message = itemView.findViewById(R.id.show_message);
+            show_image = itemView.findViewById(R.id.show_image);
             //txt_seen = itemView.findViewById(R.id.txt_seen);
         }
     }

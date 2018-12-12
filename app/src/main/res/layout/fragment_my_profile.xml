@@ -7,7 +7,8 @@
     android:padding="8dp"
     tools:context=".Fragments.MyProfileFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profileImage"
         android:layout_width="144dp"
         android:layout_height="144dp"
@@ -31,8 +32,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:layout_margin="15dp"
-            />
+            android:layout_margin="15dp" />
 
         <TextView
             android:id="@+id/studyProgramme"
@@ -41,8 +41,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:layout_margin="15dp"
-            />
+            android:layout_margin="15dp" />
 
         <TextView
             android:id="@+id/address"
@@ -51,8 +50,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:layout_margin="15dp"
-            />
+            android:layout_margin="15dp" />
 
         <TextView
             android:id="@+id/phone"
@@ -61,8 +59,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:layout_margin="15dp"
-            />
+            android:layout_margin="15dp" />
 
         <TextView
             android:id="@+id/interests"
@@ -71,8 +68,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textSize="18sp"
-            android:layout_margin="15dp"
-            />
+            android:layout_margin="15dp" />
 
     </LinearLayout>
 </RelativeLayout>
