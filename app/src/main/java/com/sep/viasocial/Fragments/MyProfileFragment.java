@@ -48,8 +48,8 @@ public class MyProfileFragment extends Fragment {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         String userID = user.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
